@@ -48,13 +48,15 @@ def generate_batch_completion(
     )
 
     batch_scores = []
+    epsilon = 1e-45
     for i in range(batch_size):
         sequence_log_prob = 0.0
         sequence_ids = generated_output.sequences[i, input_ids_cutoff:]
         for j, token_id in enumerate(sequence_ids):
-            logits_for_token = generated_output.scores[j][i, :]
-            log_probs = torch.nn.functional.log_softmax(logits_for_token, dim=-1)
-            sequence_log_prob += log_probs[token_id].item()
+            logits_for_token = generated_output.scores[j][i, :].to("cpu", dtype=torch.float32)
+            probs = torch.nn.functional.softmax(logits_for_token , dim = -1 )
+            sequence_log_prob += torch.log(probs[token_id] + epsilon).item()
+            
         batch_scores.append(sequence_log_prob)
 
     processed_results = [
