@@ -4,11 +4,11 @@ import numpy as np
 
 
 
-def sum_c_i_prime(x):
-    scores = x.apply(lambda x : x[1])
-    logs =  np.log(scores)
-    score_per_task  = np.sum(logs)
-    return score_per_task
+def calculate_sum_c_i_prime(x:pd.Series):
+    literal_listener_scores = x.to_numpy()
+    logs =  np.log(literal_listener_scores)
+    sum_c_i_prime  = np.sum(logs)
+    return sum_c_i_prime
 
     
 with os.scandir("./results") as entries:
@@ -17,8 +17,9 @@ with os.scandir("./results") as entries:
             path = os.path.relpath(entry.path)
 
             df = pd.read_json(f"{path}/eval.jsonl" , lines = True)
-            df["sum_c_i_prime"] = df.groupby("task_id")['completion'].transform(sum_c_i_prime)
+            df["sum_c_i_prime"] = df.groupby("task_id")['literal_listener'].transform(calculate_sum_c_i_prime)
             print(df["sum_c_i_prime"])
+            df["pragmatic_speaker"] = -   df ["literal_listener"] / df["sum_c_i_prime"]
             break
         
         

@@ -83,7 +83,7 @@ if __name__ == "__main__":
 
     model = (
         AutoModelForCausalLM.from_pretrained(
-            "microsoft/phi2",
+            "microsoft/phi-2",
             dtype=torch.float16,
             quantization_config=quantization_config,
             attn_implementation="sdpa",
