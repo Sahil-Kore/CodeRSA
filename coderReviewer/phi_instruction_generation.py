@@ -53,6 +53,7 @@ def get_prompt(completion):
     
     final_prompt = f"""{one_shot_example}\nInstruct: You are an expert programmer. Your task is to take a Python code snippet (a completion) and generate the corresponding natural language prompt and docstring that would describe its function.
     Code:```python\n{completion}```\nOutput:"""
+    return final_prompt
 
 def generate_instructions(df:pd.DataFrame):
 
