@@ -1,0 +1,16 @@
+python3 deepseek_log_probs_cal.py chunk_to_process_0
+sleep 5
+python3 deepseek_log_probs_cal.py chunk_to_process_1
+sleep 5
+python3 deepseek_log_probs_cal.py chunk_to_process_2
+sleep 5
+python3 deepseek_log_probs_cal.py chunk_to_process_3
+sleep 5
+python3 deepseek_log_probs_cal.py chunk_to_process_4
+sleep 5
+python3 deepseek_log_probs_cal.py chunk_to_process_5
+sleep 5
+python3 deepseek_log_probs_cal.py chunk_to_process_6
+sleep 5
+python3 deepseek_log_probs_cal.py chunk_to_process_7
+
