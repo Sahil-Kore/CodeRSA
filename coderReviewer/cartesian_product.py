@@ -28,3 +28,4 @@ for file_path in base_dir.rglob(target_name):
 
     new_path = file_path.parent / "cartesian_product.jsonl"
     pairs_df.to_json(new_path , orient= "records", lines = True)
+    
