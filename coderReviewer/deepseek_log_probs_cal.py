@@ -7,8 +7,10 @@ from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 
 import argparse
 
-import os 
+import os
+
 torch.cuda.empty_cache()
+
 
 @torch.inference_mode()
 def get_log_prob_for_batch(
@@ -66,11 +68,11 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
     parser.add_argument("input_file")
-    
+
     args = parser.parse_args()
     file_path = f"./instructions/deepseek/{args.input_file}.jsonl"
     pairs_df = pd.read_json(file_path, lines=True)
-    batch_size = 8
+    batch_size = 4
 
     results = []
 
@@ -83,11 +85,10 @@ if __name__ == "__main__":
         log_probs = get_log_prob_for_batch(instructions, completions, model, tokenizer)
         results.extend(log_probs)
 
-
     pairs_df["log_probs_c_given_i"] = results
-    
-    os.makedirs("./instructions/deepseek/probabilities",exist_ok= True)
-    
+
+    os.makedirs("./instructions/deepseek/probabilities", exist_ok=True)
 
     output_path = f"./instructions/deepseek/probabilities/{args.input_file}.jsonl"
     pairs_df.to_json(output_path, orient="records", lines=True)
+    torch.cuda.empty_cache()
