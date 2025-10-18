@@ -34,7 +34,7 @@ def generate_batch_completion(
         **inputs,
         use_cache=True,
         max_new_tokens=512,
-        temperature=0.2,
+        temperature=0.7,
         top_p=0.95,
         do_sample=True,
         eos_token_id=tokenizer.eos_token_id,
