@@ -16,7 +16,7 @@ torch.cuda.empty_cache()
 out_path = "./instructions/tinyLlama/generations.jsonl"
 os.makedirs("./instructions/tinyLlama", exist_ok=True)
 
-tokenizer = AutoTokenizer.from_pretrained("TinyLlama/TinyLlama-1.1B-Chat-v1.0")
+tokenizer = AutoTokenizer.from_pretrained("TinyLlama/TinyLlama-1.1B-Chat-v1.0" , padding_side = "left")
 
 quantization_config = BitsAndBytesConfig(
     load_in_4bit=True, bnb_4bit_compute_dtype=torch.float16, bnb_4bit_quant_type="nf4"
