@@ -1,6 +1,6 @@
 import pandas as pd 
-import os 
-import numpy as np
+import os
+ 
 files = ["./log_probs/deepseek_log_probs.jsonl" , "./log_probs/tinyLlama_log_probs.jsonl"]
 
 os.makedirs("pragmatic_speaker", exist_ok= True)
