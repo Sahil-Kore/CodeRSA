@@ -8,7 +8,6 @@ os.makedirs("pragmatic_speaker", exist_ok= True)
 for file in files :
     df = pd.read_json(file , lines = True)
     sum_log_probs = df.groupby("completion")['log_probs_c_given_i'].transform('sum')
-    print(type(sum_log_probs))
     df["pragmatic_speaker_score"] = - df["log_probs_c_given_i"] / sum_log_probs
     
     if "deepseek" in file:
